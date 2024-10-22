@@ -18,20 +18,15 @@ my %form_data = (
     locale => 'false',
 );
 
+#Here we send post request with credentials and then get the page which is contain list of connected and not connected devices to Xfinity router
+#Successful response always return code 302 Found.
 my $response = $ua->post($url, \%form_data);
 
-if ($response->is_success) {
-    print $response->decoded_content;
-} else {
-    die $response->status_line;
-}
-
-
-my $response1 = $ua->get('http://10.0.0.1/at_a_glance.jst');
+my $response_list = $ua->get('http://10.0.0.1/at_a_glance.jst');
  
-if ($response1->is_success) {
-    print $response1->decoded_content;
+if ($response_list->is_success) {
+    print $response_list->decoded_content;
 }
 else {
-    die $response1->status_line;
+    die $response_list->status_line;
 }
